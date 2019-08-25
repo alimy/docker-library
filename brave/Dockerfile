@@ -1,35 +1,16 @@
-# Version: 0.1
-FROM node:12.9.0-stretch
+# Version: 0.2
+FROM ubuntu:19.10
 MAINTAINER Michael Li "alimy@gility.net"
-RUN apt-get update && apt-get install -y \
-  bison \
-  build-essential \
+RUN apt -y update && apt -y upgrade && apt install -y \
   curl \
-  g++-multilib \
-  gcc-multilib \
   git \
-  gperf \
-  libgnome-keyring-dev \
-  libnotify-dev \
-  libssl-dev \
-  lsb-release \
-  ninja-build \
-  python-pip \
-  sudo
+  vim \
+  python-pip
 
-RUN alias ls='ls --color' && alias ll='ls -l'
-
-RUN npm install -g node-gyp@5.0.3
-RUN pip install Jinja2
-
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
-RUN cargo install sccache
-RUN echo "sccache = /root/.cargo/bin/sccache" > /root/.npmrc
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash && . /root/.bashrc && nvm install v12.9.0
 
 WORKDIR /root
 VOLUME /root/art/arm/brave
-
 VOLUME /root/.cache/sccache
 
 CMD bash
