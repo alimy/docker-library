@@ -1,2 +1,2 @@
-## bitriory/kls:brave-0.1
+## bitriory/kls:brave-x.y
 This Dockerfile used build docker image for build brave browser.
